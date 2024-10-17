@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  node-app:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=1234
+      - DB_NAME=employee_db
+      - DB_PORT=5433
+    depends_on:
+      - db
+    volumes:
+      - ./server:/usr/src/app
+
+  db:
+    image: postgres:13
+    ports:
+      - "5433:5433"
